@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+require_relative '../boot'
+
+Loader.enable_reloading
+Loader.setup
+
+def reload!
+  Loader.reload
+end
+
+require 'pry'
+
+Pry.commands.alias_command 'c', 'continue'
+Pry.commands.alias_command 's', 'step'
+Pry.commands.alias_command 'n', 'next'
+
+$0 = 'pry'
+opts = Pry::CLI.parse_options
+Pry::CLI.start(opts)
